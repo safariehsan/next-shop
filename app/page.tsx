@@ -19,7 +19,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <div className={styles.ctas}>
           <a
             className={styles.primary}
