@@ -1,3 +1,4 @@
+import Carousel from "@/components/Carousel";
 import { stripe } from "@/lib/stripe";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,9 +16,10 @@ export default async function Home() {
       <Image
         src={products.data[0].images[0]}
         alt={products.data[0].name}
-        width={450}
-        height={450}
+        width={300}
+        height={300}
       />
+      <Carousel products={products.data} />
     </main>
   );
 }
