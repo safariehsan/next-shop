@@ -24,14 +24,16 @@ const Carousel = ({ products }: Props) => {
   return (
     <Card>
       {currentProduct.images && currentProduct.images[0] && (
-        <div>
+        <div className="relative h-80 w-full">
           <Image
             src={currentProduct.images[0]}
             alt={currentProduct.name}
             layout="fill"
             objectFit="cover"
+            unoptimized
+            className="transition-opacity duration-1000 ease-in-out"
           />
-          <CardContent>
+          <CardContent className="absolute">
             <CardTitle>{currentProduct.name}</CardTitle>
             {price && price.unit_amount && (
               <p>${(price.unit_amount / 100).toFixed(2)}</p>
