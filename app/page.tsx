@@ -8,7 +8,6 @@ export default async function Home() {
     expand: ["data.default_price"],
     limit: 4,
   });
-  console.log(products);
   return (
     <main>
       <h1 className="font-bold">Welcome to the NextShop!</h1>
