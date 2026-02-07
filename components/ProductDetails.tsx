@@ -12,7 +12,7 @@ interface Props {
 
 const ProductDetails = ({ product }: Props) => {
   const price = product.default_price as Stripe.Price;
-  const { items, addItem } = useCartStore();
+  const { items, addItem, removeItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
   const onAddClick = () => {
@@ -23,6 +23,9 @@ const ProductDetails = ({ product }: Props) => {
       imgUrl: product.images ? product.images[0] : null,
       quantity: 1,
     });
+  };
+  const onRemoveClick = () => {
+    removeItem(product.id);
   };
   return (
     <div>
@@ -41,7 +44,9 @@ const ProductDetails = ({ product }: Props) => {
           ${(price.unit_amount / 100).toFixed(2)}
         </p>
       )}
-      <Button variant="outline">-</Button>
+      <Button variant="outline" onClick={onRemoveClick}>
+        -
+      </Button>
       <span>{quantity}</span>
       <Button variant="outline" onClick={onAddClick}>
         +
