@@ -18,6 +18,7 @@ export default async function Home() {
         alt={products.data[0].name}
         width={300}
         height={300}
+        unoptimized
       />
       <Carousel products={products.data} />
     </main>
