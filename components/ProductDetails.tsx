@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import Stripe from "stripe";
 import { Button } from "./ui/button";
+import { useCartStore } from "@/store/cart-store";
 
 interface Props {
   product: Stripe.Product;
@@ -9,6 +12,18 @@ interface Props {
 
 const ProductDetails = ({ product }: Props) => {
   const price = product.default_price as Stripe.Price;
+  const { items, addItem } = useCartStore();
+  const cartItem = items.find((item) => item.id === product.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
+  const onAddClick = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: price.unit_amount as number,
+      imgUrl: product.images ? product.images[0] : null,
+      quantity: 1,
+    });
+  };
   return (
     <div>
       ProductDetails ({product.id})
@@ -27,8 +42,10 @@ const ProductDetails = ({ product }: Props) => {
         </p>
       )}
       <Button variant="outline">-</Button>
-      <span>0</span>
-      <Button variant="outline">+</Button>
+      <span>{quantity}</span>
+      <Button variant="outline" onClick={onAddClick}>
+        +
+      </Button>
     </div>
   );
 };
