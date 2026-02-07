@@ -12,7 +12,7 @@ interface Props {
 const ProductItem = ({ product }: Props) => {
   const price = product.default_price as Stripe.Price;
   return (
-    <Link href={`/products/${1}`}>
+    <Link href={`/products/${product.id}`}>
       <Card className="bg-gray-100">
         <div className="h-auto w-60">
           <Image
@@ -23,12 +23,9 @@ const ProductItem = ({ product }: Props) => {
             height={300}
             className=""
           />
-
           <CardContent className="">
             <CardTitle>{product.name}</CardTitle>
-
             <p className="description">{product.description}</p>
-            <hr />
             {price && price.unit_amount && (
               <p className="font-bold text-md">
                 ${(price.unit_amount / 100).toFixed(2)}
