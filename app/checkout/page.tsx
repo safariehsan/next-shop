@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { checkoutAction } from "./checkout-action";
 
 const CheckoutPage = () => {
   const { items, clearCart } = useCartStore();
@@ -52,11 +53,12 @@ const CheckoutPage = () => {
           </TableRow>
         </TableFooter>
       </Table>
-      <form>
+      <form action={checkoutAction}>
+        <input type="hidden" value={JSON.stringify(items)} name="items" />
         <Button variant="secondary" onClick={clearCart}>
           Clear Cart
         </Button>
-        <Button>Proceed to payment</Button>
+        <Button type="submit">Proceed to payment</Button>
       </form>
     </div>
   );
