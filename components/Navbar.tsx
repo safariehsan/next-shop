@@ -25,7 +25,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <nav className="flex justify-between border-b border-2 border-gray-300 my-4 bg-gray-100">
+      <nav className="flex justify-between border-b border-2 border-gray-300 mt-4 p-3 bg-gray-100">
         <div>
           <Link href="/">NextShop</Link>
         </div>
@@ -36,9 +36,9 @@ const Navbar = () => {
         </div>
         <div className="relative">
           <Link href="/checkout">
-            <ShoppingCartIcon className="w-6" />
-            {cartCount && (
-              <span className="bg-red-500 text-white absolute bottom-4 right-2 rounded-full h-5 w-5 text-sm font-semibold p-0 text-center block">
+            <ShoppingCartIcon className="w-8" />
+            {cartCount !== 0 && (
+              <span className="bg-red-500 text-white absolute bottom-5 -right-1 rounded-full h-5 w-5 text-sm font-semibold p-0 text-center block">
                 {cartCount}
               </span>
             )}
