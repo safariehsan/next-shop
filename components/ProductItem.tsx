@@ -1,9 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import Stripe from "stripe";
-import { Card, CardContent, CardFooter, CardTitle } from "./ui/card";
+import { Card, CardContent, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useCartStore } from "@/store/cart-store";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { EyeIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   product: Stripe.Product;
@@ -11,6 +14,16 @@ interface Props {
 
 const ProductItem = ({ product }: Props) => {
   const price = product.default_price as Stripe.Price;
+  const { addItem } = useCartStore();
+  const onAddItemClick = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: price.unit_amount as number,
+      imgUrl: product.images ? product.images[0] : null,
+      quantity: 1,
+    });
+  };
   return (
     <Card className="bg-gray-100">
       <div className="h-auto w-60">
@@ -31,11 +44,22 @@ const ProductItem = ({ product }: Props) => {
             </p>
           )}
         </CardContent>
-        <CardFooter className="">
-          <Button className="bg-indigo-400 px-4 py-1 w-full block">
-            <Link href={`/products/${product.id}`}>View Details</Link>
+        <div className="flex justify-around mt-4">
+          <Button className="bg-gray-200 px-4 py-1 text-center">
+            <Link
+              href={`/products/${product.id}`}
+              className="flex items-center justify-center gap-2"
+            >
+              <EyeIcon /> View
+            </Link>
           </Button>
-        </CardFooter>
+          <Button
+            className="bg-gray-200 px-4 py-1 text-center"
+            onClick={onAddItemClick}
+          >
+            <PlusCircleIcon /> Add
+          </Button>
+        </div>
       </div>
     </Card>
   );
