@@ -1,6 +1,6 @@
-import ProductDetails from "@/components/ProductDetails";
-import { stripe } from "@/lib/stripe";
 import React from "react";
+import { stripe } from "@/lib/stripe";
+import ProductDetails from "@/components/ProductDetails";
 
 const ProductPage = async ({ params }: { params: { id: string } }) => {
   const currentProduct = await stripe.products.retrieve(params.id, {
